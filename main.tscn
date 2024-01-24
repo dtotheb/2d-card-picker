@@ -1,0 +1,62 @@
+[gd_scene load_steps=3 format=3 uid="uid://dds4jnlcr03pe"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_hhf4d"]
+[ext_resource type="PackedScene" uid="uid://djxykh6yqwk7s" path="res://card.tscn" id="1_okerf"]
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_hhf4d")
+
+[node name="card" parent="." instance=ExtResource("1_okerf")]
+position = Vector2(578, 488)
+cardFace = "S1"
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="flipButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 443.0
+offset_top = 278.0
+offset_right = 553.0
+offset_bottom = 334.0
+text = "Flip Card"
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_right = 1134.0
+offset_bottom = 139.0
+theme_override_font_sizes/font_size = 40
+text = "Choose a card:"
+horizontal_alignment = 1
+
+[node name="setButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 444.0
+offset_top = 208.0
+offset_right = 554.0
+offset_bottom = 264.0
+text = "Set Card"
+
+[node name="randomButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 591.0
+offset_top = 206.0
+offset_right = 705.0
+offset_bottom = 264.0
+text = "Random Card"
+
+[node name="cardFaceInput" type="TextEdit" parent="Control"]
+layout_mode = 0
+offset_left = 519.0
+offset_top = 113.0
+offset_right = 641.0
+offset_bottom = 181.0
+theme_override_font_sizes/font_size = 40
+text = "S1"
+
+[connection signal="pressed" from="Control/flipButton" to="." method="_on_flip_button_pressed"]
+[connection signal="pressed" from="Control/setButton" to="." method="_on_setButton_pressed"]
+[connection signal="pressed" from="Control/randomButton" to="." method="_on_randomButton_pressed"]

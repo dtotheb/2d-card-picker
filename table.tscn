@@ -1,0 +1,144 @@
+[gd_scene load_steps=13 format=3 uid="uid://qmo8iga88gdv"]
+
+[ext_resource type="Script" path="res://table.gd" id="1_8gv1w"]
+[ext_resource type="Script" path="res://deck.gd" id="1_pc0yc"]
+[ext_resource type="Texture2D" uid="uid://bld27o1j3h6u0" path="res://art/colored-transparent.png" id="2_32y0p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g3d3s"]
+atlas = ExtResource("2_32y0p")
+region = Rect2(323, 272, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ex5l1"]
+atlas = ExtResource("2_32y0p")
+region = Rect2(323, 289, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8pv7e"]
+atlas = ExtResource("2_32y0p")
+region = Rect2(323, 306, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6vdis"]
+atlas = ExtResource("2_32y0p")
+region = Rect2(323, 323, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_20whf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g3d3s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ex5l1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8pv7e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6vdis")
+}],
+"loop": true,
+"name": &"cardBack",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wqxc1"]
+size = Vector2(195, 273)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7q6gt"]
+size = Vector2(195, 275)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ubv5p"]
+atlas = ExtResource("2_32y0p")
+region = Rect2(323, 272, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mi7gf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ubv5p")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="table" type="Node2D"]
+script = ExtResource("1_8gv1w")
+
+[node name="hand" type="Node2D" parent="."]
+position = Vector2(239, 498)
+
+[node name="deck" type="Node2D" parent="."]
+position = Vector2(316, 195)
+script = ExtResource("1_pc0yc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="deck"]
+texture_filter = 1
+position = Vector2(2.08165e-12, 2.08165e-12)
+scale = Vector2(16.25, 19.5)
+sprite_frames = SubResource("SpriteFrames_20whf")
+animation = &"cardBack"
+frame = 2
+
+[node name="Area2D" type="Area2D" parent="deck"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="deck/Area2D"]
+position = Vector2(-1.5, -0.5)
+shape = SubResource("RectangleShape2D_wqxc1")
+
+[node name="discardPile" type="Node2D" parent="."]
+position = Vector2(634, 200)
+
+[node name="discardedCards" type="Node2D" parent="discardPile"]
+
+[node name="Area2D" type="Area2D" parent="discardPile"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="discardPile/Area2D"]
+position = Vector2(0.5, -2.5)
+shape = SubResource("RectangleShape2D_7q6gt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="discardPile"]
+texture_filter = 1
+scale = Vector2(16.25, 19.5)
+sprite_frames = SubResource("SpriteFrames_mi7gf")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NewDeck Button" type="Button" parent="Control"]
+offset_left = 47.0
+offset_top = 23.0
+offset_right = 133.0
+offset_bottom = 54.0
+text = "New Deck"
+
+[node name="DeckSizeLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 215.0
+offset_top = 23.0
+offset_right = 408.0
+offset_bottom = 52.0
+text = "60 Cards"
+horizontal_alignment = 1
+
+[node name="DiscardPileSizeLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 546.0
+offset_top = 26.0
+offset_right = 721.0
+offset_bottom = 62.0
+text = "0 Cards"
+horizontal_alignment = 1
+
+[node name="HandSizeLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 341.0
+offset_right = 148.0
+offset_bottom = 392.0
+text = "0/5 Cards in Hand"
+
+[connection signal="input_event" from="deck/Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="pressed" from="Control/NewDeck Button" to="." method="_on_button_pressed"]
