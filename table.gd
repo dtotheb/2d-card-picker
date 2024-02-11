@@ -28,6 +28,7 @@ func drawCard():
 			curPlayer = curPlayer * -1
 
 func addCardToHand(CardVal, TargetHand):
+	
 	var newCard = card.instantiate()
 	newCard.cardFace = CardVal
 	
@@ -40,7 +41,14 @@ func addCardToHand(CardVal, TargetHand):
 	
 func playCardToDiscardPile(PlayedCard):
 	#PlayedCard.CardClicked.disconnect(playCardToDiscardPile)
+	var hand = PlayedCard.get_parent().get_parent()
+	var Handname = hand.get_name()
 	$discardPile.discardCard(PlayedCard)
+	if(Handname.contains("Player") and Handname.contains("Hand")):
+		hand.CondenseHand()
+
+
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

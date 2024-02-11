@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var MaxHandSize : int = 5
+var cardWidth = Vector2(200,0)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -14,11 +15,18 @@ func AddCard(NewCard):
 		$MyCards.add_child(NewCard)
 		var HandSize = $MyCards.get_child_count()
 		setHandSizeLabel(HandSize)
-		var cardWidth = Vector2(200,0)
+		
 		NewCard.position = $MyCards.position + (cardWidth * ( HandSize - 1))
 		return true
 	else:
 		return false
+
+func CondenseHand():
+	var curCard = 0
+	for Card in $MyCards.get_children():
+		Card.position = $MyCards.position + (cardWidth *  curCard )
+		curCard += 1
+		
 	
 func setHandSizeLabel(count):
 	$HandSizeLabel.text = str(count) + "/" + str(MaxHandSize) + " Cards in Hand"
