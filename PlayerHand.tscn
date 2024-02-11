@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpbpnhvlcg32w"]
+
+[ext_resource type="Script" path="res://PlayerHand.gd" id="1_8h4x1"]
+
+[node name="PlayerHand" type="Node2D"]
+position = Vector2(5, 1)
+script = ExtResource("1_8h4x1")
+
+[node name="HandSizeLabel" type="Label" parent="."]
+offset_left = -7.0
+offset_top = -6.0
+offset_right = 131.0
+offset_bottom = 45.0
+text = "0/5 Cards in Hand"
+
+[node name="MyCards" type="Node2D" parent="."]
+position = Vector2(7, 79)

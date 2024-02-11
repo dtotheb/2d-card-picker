@@ -50,7 +50,7 @@ func setCardFace(newCardFace):
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if faceDown:
 		showCardBack()
 	else:
@@ -60,7 +60,7 @@ func _process(delta):
 
 
 
-func _on_area_2d_input_event(viewport, event, shape_idx):
+func _on_area_2d_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton \
 	and event.button_index == MOUSE_BUTTON_LEFT \
 	and event.is_pressed():

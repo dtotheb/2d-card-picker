@@ -8,6 +8,10 @@ const cardFaceVals = ["1", "2", "3", "4", "5", "6", "7","8","9","10","11","12","
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	generateDeck()
+	
+
+func setDeckSizeLabel(count):
+	$DeckSizeLabel.text = str(count) + " Cards"
 
 
 func generateDeck(shuffle=true):
@@ -16,6 +20,7 @@ func generateDeck(shuffle=true):
 		for val in cardFaceVals:
 			var newCard = suit + val
 			Cards.append(newCard)
+	setDeckSizeLabel(len(Cards))
 	if shuffle:
 		Cards.shuffle()
 
@@ -23,6 +28,7 @@ func drawCard():
 	if len(Cards) > 0:
 		var topCard = Cards[0]
 		Cards.remove_at(0)
+		setDeckSizeLabel(len(Cards))
 		return topCard
 	else:
 		print("Deck is Empty!")
@@ -34,7 +40,7 @@ func on_click():
 	print(newCard)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 

@@ -430,6 +430,7 @@ size = Vector2(200, 272)
 
 [node name="card" type="Node2D"]
 texture_filter = 1
+position = Vector2(102, 135)
 script = ExtResource("1_gu8f4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
